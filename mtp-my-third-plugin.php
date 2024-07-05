@@ -2,7 +2,7 @@
 
 
 /**
- * Plugin Name: mtp
+ * Plugin Name: MTP Third
  */
 
 
