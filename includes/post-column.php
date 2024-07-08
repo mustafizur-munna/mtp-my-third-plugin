@@ -7,7 +7,7 @@ class Mtp_Post_Column{
     public function __construct(){
         add_filter( 'manage_page_posts_columns', array($this, 'post_columns'), 10, 1 );
         add_action( 'manage_page_posts_custom_column', array($this,'add_column_value'), 10, 2 );
-        add_action( 'wp_head', array($this,'count_post_view'));
+        add_action( 'wp_head', array( $this,'count_post_view' ) );
     }
 
     // Add column heading
@@ -42,6 +42,10 @@ class Mtp_Post_Column{
                 echo "Image not found";
             }
         }
+        if( 'view' == $column_name ){
+            $current_view_value = get_post_meta($post_id,"_post_view_count", true);
+            echo $current_view_value ? $current_view_value : 0;
+        }
     }
 
     // Page view counter function
@@ -51,9 +55,19 @@ class Mtp_Post_Column{
 
             $post_id = $post->ID;
             
+            // Get previous count
             $current_view_value = get_post_meta($post_id,"_post_view_count", true);
 
-            echo $current_view_value;
+            if( ! $current_view_value ) {
+                $current_view_value = intval($current_view_value);
+            }
+
+            // Increment view count
+            $current_view_value++;
+
+            // save updated value
+
+            update_post_meta( $post_id, "_post_view_count", $current_view_value );
 
         }
     }
