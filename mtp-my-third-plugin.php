@@ -2,28 +2,29 @@
 
 
 /**
- * Plugin Name: MTP Third
+ * Plugin Name: My Third Plugin
  */
 
+ class Mtp_my_third_plugin{
 
-
- class Mtp_my_third_plugin {
     private static $instance;
 
+    public static function get_instance() {
+        if( ! self::$instance ) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
     private function __construct() {
         $this->require_classes();
     }
 
-    public static function get_instance() {
-        if ( ! isset( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
-
     private function require_classes() {
-        require_once plugin_dir_path( __FILE__ ) . '/includes/admin-menu.php';
-        new Mtp_admin_menu();
+        require_once __DIR__ . '/includes/admin-menu.php';
+        new Mtp_Third_Admin_menu();
+        require_once __DIR__ . '/includes/post-column.php';
+        new Mtp_Post_Column();
     }
  }
 

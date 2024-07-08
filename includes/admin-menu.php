@@ -1,14 +1,13 @@
 <?php
 
-class Mtp_admin_menu{
+class Mtp_Third_Admin_menu{
     public function __construct(){
-        add_action('admin_menu', array( $this,'admin_menu') );
+        add_action('admin_menu', array($this, 'admin_menu'));
     }
     public function admin_menu(){
-        add_menu_page('MTP', 'MTP', 'manage_options', 'mtp', array( $this,'mtp_callback' ) );
+        add_menu_page( "MTP Third", "MTP Third", "manage_options", "mtp-third", array( $this, 'mtp_third_menu_callback'), "dashicons-image-filter", 5 );
     }
-
-    public function mtp_callback() {
-        include_once __DIR__ . '/templates/mtp-menu.php';
+    public function mtp_third_menu_callback(){
+        include_once __DIR__ . '/templates/mtp-third-admin-menu.php';
     }
 }
